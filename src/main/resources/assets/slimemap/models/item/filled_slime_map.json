@@ -1,7 +1,7 @@
 {
   "parent": "item/generated",
   "textures": {
-    "layer0": "slimemap:item/filled_slime_map",
-    "layer1": "slimemap:item/filled_slime_map_markings"
+    "layer0": "slimemap:item/slime_map",
+    "layer1": "slimemap:item/slime_map_markings"
   }
 }

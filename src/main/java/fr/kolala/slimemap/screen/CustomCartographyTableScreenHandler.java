@@ -46,10 +46,6 @@ public class CustomCartographyTableScreenHandler extends ScreenHandler {
         }
     };
 
-    public CustomCartographyTableScreenHandler(int syncId, PlayerInventory inventory) {
-       this(syncId, inventory, ScreenHandlerContext.EMPTY);
-    }
-
     public CustomCartographyTableScreenHandler(int syncId, PlayerInventory inventory, ScreenHandlerContext context) {
         super(ScreenHandlerType.CARTOGRAPHY_TABLE, syncId);
         int i;
