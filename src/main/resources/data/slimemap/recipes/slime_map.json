@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "SPS",
+    "PCP",
+    "SPS"
+  ],
+  "key": {
+    "S": {
+      "item": "minecraft:slime_ball"
+    },
+    "P": {
+      "item": "minecraft:paper"
+    },
+    "C": {
+      "item": "minecraft:compass"
+    }
+  },
+  "result": {
+    "item": "slimemap:slime_map",
+    "count": 1
+  }
+}
