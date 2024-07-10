@@ -1,0 +1,31 @@
+{
+	"schemaVersion": 1,
+	"id": "slimemap",
+	"version": "${version}",
+	"name": "SlimeMap",
+	"description": "Creates a map displaying Slime chunks",
+	"authors": [
+		"Kolala"
+	],
+	"contact": {
+		"homepage": "https://fabricmc.net/",
+		"sources": "https://github.com/FabricMC/fabric-example-mod"
+	},
+	"license": "MIT",
+	"icon": "assets/slimemap/icon.png",
+	"environment": "*",
+	"entrypoints": {
+		"main": [
+			"fr.kolala.slimemap.SlimeMap"
+		]
+	},
+	"mixins": [
+		"slimemap.mixins.json"
+	],
+	"depends": {
+		"fabricloader": ">=0.15.10",
+		"minecraft": "~1.20.4",
+		"java": ">=17",
+		"fabric-api": "*"
+	}
+}

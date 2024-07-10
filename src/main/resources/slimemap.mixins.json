@@ -1,0 +1,14 @@
+{
+  "required": true,
+  "package": "fr.kolala.slimemap.mixin",
+  "compatibilityLevel": "JAVA_17",
+  "mixins": [
+    "CartographyTableBlockMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  },
+  "client": [
+    "HeldItemRendererMixin"
+  ]
+}
