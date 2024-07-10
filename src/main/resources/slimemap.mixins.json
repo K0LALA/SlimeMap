@@ -3,7 +3,8 @@
   "package": "fr.kolala.slimemap.mixin",
   "compatibilityLevel": "JAVA_17",
   "mixins": [
-    "CartographyTableBlockMixin"
+    "CartographyTableBlockMixin",
+    "ItemFrameEntityMixin"
   ],
   "injectors": {
     "defaultRequire": 1
