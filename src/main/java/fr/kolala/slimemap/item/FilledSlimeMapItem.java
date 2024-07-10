@@ -3,6 +3,7 @@ package fr.kolala.slimemap.item;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.LinkedHashMultiset;
 import com.google.common.collect.Multisets;
+import fr.kolala.slimemap.config.ConfigHelper;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.MapColor;
@@ -17,9 +18,7 @@ import net.minecraft.nbt.NbtCompound;
 import net.minecraft.nbt.NbtElement;
 import net.minecraft.registry.RegistryKey;
 import net.minecraft.registry.tag.BlockTags;
-import net.minecraft.text.Text;
 import net.minecraft.util.ActionResult;
-import net.minecraft.util.Formatting;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.ChunkSectionPos;
 import net.minecraft.util.math.Direction;
@@ -130,9 +129,12 @@ public class FilledSlimeMapItem extends FilledMapItem {
                         mutable.set(r + u, 0, s + v);
                         int w = worldChunk.sampleHeightmap(Heightmap.Type.WORLD_SURFACE, mutable.getX(), mutable.getZ()) + 1;
                         if (isSlimeChunk(seed, worldChunk.getPos().x, worldChunk.getPos().z)) {
-                            // TODO: Add config to set color of slime chunks and if they are erasing what's below or not
-                            blockState = Blocks.SLIME_BLOCK.getDefaultState();
-                            //multiset.add(MapColor.PALE_GREEN, Integer.MAX_VALUE);
+                            if (ConfigHelper.getInt("coverBlocks") == 1) {
+                                multiset.add(Blocks.SLIME_BLOCK.getDefaultMapColor(), Integer.MAX_VALUE);
+                                continue;
+                            } else {
+                                blockState = Blocks.SLIME_BLOCK.getDefaultState();
+                            }
                         }
                         else if (w > world.getBottomY() + 1) {
                             do {
@@ -189,43 +191,6 @@ public class FilledSlimeMapItem extends FilledMapItem {
             return fluidState.getBlockState();
         }
         return state;
-    }
-
-    private static void scale(ItemStack map, World world, int amount) {
-        MapState mapState = FilledSlimeMapItem.getMapState(map, world);
-        if (mapState != null) {
-            int i = world.getNextMapId();
-            world.putMapState(FilledSlimeMapItem.getMapName(i), mapState.zoomOut(amount));
-            FilledSlimeMapItem.setMapId(map, i);
-        }
-    }
-
-    public static void copyMap(World world, ItemStack stack) {
-        MapState mapState = FilledSlimeMapItem.getMapState(stack, world);
-        if (mapState != null) {
-            int i = world.getNextMapId();
-            String string = FilledSlimeMapItem.getMapName(i);
-            MapState mapState2 = mapState.copy();
-            world.putMapState(string, mapState2);
-            FilledSlimeMapItem.setMapId(stack, i);
-        }
-    }
-
-    private static Text getIdText(int id) {
-        return Text.translatable("filled_map.id", id).formatted(Formatting.GRAY);
-    }
-
-    public static Text getIdText(ItemStack stack) {
-        return FilledSlimeMapItem.getIdText(FilledSlimeMapItem.getMapId(stack));
-    }
-
-    public static int getMapColor(ItemStack stack) {
-        NbtCompound nbtCompound = stack.getSubNbt("display");
-        if (nbtCompound != null && nbtCompound.contains("MapColor", NbtElement.NUMBER_TYPE)) {
-            int i = nbtCompound.getInt("MapColor");
-            return 0xFF000000 | i & 0xFFFFFF;
-        }
-        return -12173266;
     }
 
     @Override
