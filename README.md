@@ -2,7 +2,7 @@
 
 ---
 
-### This mod adds a new type of map showing nearby slime chunks. It works like a normal map, you can put it on an item frame and use it in a cartography table.
+This mod adds a new type of map showing nearby slime chunks. It works like a normal map, you can put it on an item frame and use it in a cartography table.
 
 ## Config
 
