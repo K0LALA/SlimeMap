@@ -75,7 +75,7 @@ public class CustomCartographyTableScreenHandler extends ScreenHandler {
             public void onTakeItem(PlayerEntity player, ItemStack stack) {
                 CustomCartographyTableScreenHandler.this.slots.get(MAP_SLOT_INDEX).takeStack(1);
                 CustomCartographyTableScreenHandler.this.slots.get(MATERIAL_SLOT_INDEX).takeStack(1);
-                stack.getItem().onCraftByPlayer(stack, player.getWorld(), player);
+                stack.getItem().onCraft(stack, player.getWorld(), player);
                 context.run((world, pos) -> {
                     long l = world.getTime();
                     if (CustomCartographyTableScreenHandler.this.lastTakeResultTime != l) {
@@ -162,12 +162,12 @@ public class CustomCartographyTableScreenHandler extends ScreenHandler {
             ItemStack itemStack2 = slot2.getStack();
             itemStack = itemStack2.copy();
             if (slot == RESULT_SLOT_INDEX) {
-                itemStack2.getItem().onCraftByPlayer(itemStack2, player.getWorld(), player);
+                itemStack2.getItem().onCraft(itemStack2, player.getWorld(), player);
                 if (!this.insertItem(itemStack2, INVENTORY_START, HOTBAR_END, true)) {
                     return ItemStack.EMPTY;
                 }
                 slot2.onQuickTransfer(itemStack2, itemStack);
-            } else if (slot == MATERIAL_SLOT_INDEX || slot == MAP_SLOT_INDEX ? !this.insertItem(itemStack2, INVENTORY_START, HOTBAR_END, false) : (itemStack2.isOf(Items.FILLED_MAP) || itemStack2.isOf(ModItems.FILLED_SLIME_MAP) ? !this.insertItem(itemStack2, MAP_SLOT_INDEX, MATERIAL_SLOT_INDEX, false) : (itemStack2.isOf(Items.PAPER) || itemStack2.isOf(Items.MAP) || itemStack2.isOf(Items.GLASS_PANE) ? !this.insertItem(itemStack2, MATERIAL_SLOT_INDEX, RESULT_SLOT_INDEX, false) : (slot >= INVENTORY_START && slot < INVENTORY_END ? !this.insertItem(itemStack2, HOTBAR_START, HOTBAR_END, false) : slot >= HOTBAR_START && slot < HOTBAR_END && !this.insertItem(itemStack2, INVENTORY_START, INVENTORY_END, false))))) {
+            } else if (slot == MATERIAL_SLOT_INDEX || slot == MAP_SLOT_INDEX ? !this.insertItem(itemStack2, INVENTORY_START, HOTBAR_END, false) : (itemStack2.isOf(Items.FILLED_MAP) || itemStack2.isOf(ModItems.FILLED_SLIME_MAP) ? !this.insertItem(itemStack2, MAP_SLOT_INDEX, MATERIAL_SLOT_INDEX, false) : (itemStack2.isOf(Items.PAPER) || itemStack2.isOf(Items.MAP) || itemStack2.isOf(Items.GLASS_PANE) || itemStack2.isOf(Items.SLIME_BALL) || itemStack2.isOf(ModItems.SLIME_MAP) ? !this.insertItem(itemStack2, MATERIAL_SLOT_INDEX, RESULT_SLOT_INDEX, false) : (slot >= INVENTORY_START && slot < INVENTORY_END ? !this.insertItem(itemStack2, HOTBAR_START, HOTBAR_END, false) : slot >= HOTBAR_START && slot < HOTBAR_END && !this.insertItem(itemStack2, INVENTORY_START, INVENTORY_END, false))))) {
                 return ItemStack.EMPTY;
             }
             if (itemStack2.isEmpty()) {
@@ -181,6 +181,10 @@ public class CustomCartographyTableScreenHandler extends ScreenHandler {
             this.sendContentUpdates();
         }
         return itemStack;
+    }
+
+    private boolean canInsertItem(ItemStack map, ItemStack itemStack) {
+        return true;
     }
 
     @Override

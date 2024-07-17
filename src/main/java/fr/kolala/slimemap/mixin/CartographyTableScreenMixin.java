@@ -26,8 +26,6 @@ import org.spongepowered.asm.mixin.Shadow;
 public abstract class CartographyTableScreenMixin extends HandledScreen<CartographyTableScreenHandler> {
     @Shadow @Final private static Identifier TEXTURE;
 
-    @Shadow @Final private static Identifier ERROR_TEXTURE;
-
     @Shadow protected abstract void drawMap(DrawContext context, @Nullable Integer mapId, @Nullable MapState mapState, boolean cloneMode, boolean expandMode, boolean lockMode, boolean cannotExpand);
 
     public CartographyTableScreenMixin(CartographyTableScreenHandler handler, PlayerInventory inventory, Text title) {
@@ -65,12 +63,12 @@ public abstract class CartographyTableScreenMixin extends HandledScreen<Cartogra
             if (mapState.locked) {
                 bl4 = true;
                 if (bl2 || bl3) {
-                    context.drawGuiTexture(ERROR_TEXTURE, i + 35, j + 31, 28, 21);
+                    context.drawTexture(TEXTURE, i + 35, j + 31, this.backgroundWidth + 50, 132, 28, 21);
                 }
             }
             if (bl2 && mapState.scale >= 4) {
                 bl4 = true;
-                context.drawGuiTexture(ERROR_TEXTURE, i + 35, j + 31, 28, 21);
+                context.drawTexture(TEXTURE, i + 35, j + 31, this.backgroundWidth + 50, 132, 28, 21);
             }
         }
         this.drawMap(context, integer, mapState, bl, bl2, bl3, bl4);
