@@ -8,8 +8,8 @@
 		"Kolala"
 	],
 	"contact": {
-		"homepage": "https://fabricmc.net/",
-		"sources": "https://github.com/FabricMC/fabric-example-mod"
+		"homepage": "https://modrinth.com/mod/slime-map",
+		"sources": "https://github.com/K0LALA/SlimeMap"
 	},
 	"license": "MIT",
 	"icon": "assets/slimemap/icon.png",
