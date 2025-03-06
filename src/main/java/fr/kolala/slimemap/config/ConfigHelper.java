@@ -5,7 +5,6 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import fr.kolala.slimemap.SlimeMap;
-import net.minecraft.client.MinecraftClient;
 import org.jetbrains.annotations.Nullable;
 
 import java.io.*;
@@ -15,7 +14,7 @@ import java.util.UUID;
 
 public class ConfigHelper {
     private static File getConfigFile() {
-        return new File(new File(MinecraftClient.getInstance().runDirectory, "config"), SlimeMap.MOD_ID + ".json");
+        return new File("config", SlimeMap.MOD_ID + ".json");
     }
 
     public static boolean createConfigFileIfNotExisting() {
